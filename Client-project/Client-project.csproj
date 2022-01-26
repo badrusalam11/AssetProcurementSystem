@@ -5,4 +5,12 @@
     <RootNamespace>Client_project</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\Data\" />
+  </ItemGroup>
+
 </Project>
