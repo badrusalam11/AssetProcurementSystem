@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,6 +24,7 @@ namespace API_project.Models
         public string EmployeeID { get; set; }
         [JsonIgnore]
         public virtual ICollection<AccountRole> AccountRoles { get; set; }
+        [JsonIgnore]
         public virtual ICollection<RequestPeminjaman> RequestPeminjaman { get; set; }
     }
 }

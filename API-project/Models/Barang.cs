@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,6 +22,7 @@ namespace API_project.Models
         [JsonIgnore]
         public virtual Type Type { get; set; }
         public string TypeID { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Peminjaman> Peminjaman { get; set; }
     }
 }

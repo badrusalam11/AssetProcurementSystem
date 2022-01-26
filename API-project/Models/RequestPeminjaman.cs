@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +20,7 @@ namespace API_project.Models
         [JsonIgnore]
         public virtual Account Account  { get; set; }
         public string AccountID { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Peminjaman> Peminjaman { get; set; }
 
     }
