@@ -23,6 +23,11 @@ namespace Client_project.Controllers
             return View();
         }
 
+        public IActionResult Cors()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
