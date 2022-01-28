@@ -332,3 +332,10 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+API-project/Migrations/20220126040512_NewDatabase.cs
+API-project/Migrations/20220126040512_NewDatabase.Designer.cs
+API-project/Migrations/20220126044217_ModelPengembalian-Tagihan-Nota.cs
+API-project/Migrations/20220126044217_ModelPengembalian-Tagihan-Nota.Designer.cs
+API-project/Migrations/MyContextModelSnapshot.cs
+API-project/appsettings.json
+
