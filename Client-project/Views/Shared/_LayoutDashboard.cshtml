@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="ltr" lang="en">
 
 <head>
@@ -22,6 +22,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="~/vendor/plugins/images/favicon.png">
     <!-- Custom CSS -->
     <link href="~/vendor/css/style.min.css" rel="stylesheet">
+    <link href="~/css/StyleSheet.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -98,15 +99,22 @@
                     <div>-->
                         @*<input type="text" placeholder="Search..." class="form-control mt-0">*@
                         <!--<a href="" class="active">
+
+                                    <i class=" fas fa-shopping-cart fa-2x" style="color: lightgrey;"></i>
+                                </a>
+                            </div>
+                        </li>-->
+
+                        <li>
                                 <i class=" fas fa-shopping-cart fa-2x" style="color: lightgrey;"></i>
                             </a>
                         </div>
                     </li>-->
-                        <li>
+                        @*<li>
                             <div class="profile-pic m-auto" href="#">
                                 <i class=" fas fa-shopping-cart fa-2x" style="color: lightgrey;"></i>
                             </div>
-                        </li>
+                        </li>*@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -137,60 +145,50 @@
                     <ul id="sidebarnav">
                         <!-- List Barang-->
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Employee" asp-action="Index"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="Index"
                                aria-expanded="false">
                                 <i class=" fas fa-home" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Employee" asp-action="Barang"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="Barang"
                                aria-expanded="false">
                                 <i class=" fas fa-box-open" aria-hidden="true"></i>
-                                <span class="hide-menu">List Barang</span>
+                                <span class="hide-menu">Item List</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                                 <i class="fas fa-hand-holding" aria-hidden="true"></i>
-                                <span class="hide-menu">Pinjaman</span>
+                                <span class="hide-menu">Loan</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item active">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Employee" asp-action="Pinjaman"
-                                       aria-expanded="false">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu">Pinjaman Ku</span>
-                                    </a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Employee" asp-action="Pinjaman">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Approve Pinjaman </span>
-                                    </a>
-                                </li>
-                            </ul>
+
                         </li>
+                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"  aria-expanded="false">
+
                                 <i class="fas fa-list-alt" aria-hidden="true"></i>
-                                <span class="hide-menu">Tagihan</span>
+                                <span class="hide-menu">Bills</span>
                             </a>
+
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item active">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Employee" asp-action="Tagihan"
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="Tagihanku"
                                        aria-expanded="false">
                                         <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu">Tagihan ku</span>
+                                        <span class="hide-menu">My Bills</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="index2.html" class="sidebar-link">
+                                    <a class="sidebar-link" asp-controller="Menu" asp-action="ApproveTagihan">
                                         <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Approve Tagihan </span>
+                                        <span class="hide-menu"> Approve Bills </span>
                                     </a>
                                 </li>
                             </ul>
+
                         </li>
                     </ul>
 

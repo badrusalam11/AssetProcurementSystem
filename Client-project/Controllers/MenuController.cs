@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client_project.Controllers
 {
-    public class EmployeeController : Controller
+    public class MenuController : Controller
     {
         public IActionResult Index()
         {
@@ -20,10 +20,17 @@ namespace Client_project.Controllers
         {
             return View();
         }
-        public IActionResult Tagihan()
+        public IActionResult ApprovePinjaman()
         {
             return View();
         }
-
+        public IActionResult Tagihanku()
+        {
+            return View();
+        }
+        public IActionResult ApproveTagihan()
+        {
+            return View();
+        }
     }
 }
