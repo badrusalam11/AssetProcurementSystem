@@ -1,5 +1,16 @@
 ﻿$(document).ready(function () {
-    let datatable = $('#Table').DataTable(
+    let isScrollX;
+    if (window.matchMedia("(max-width: 425px)").matches) {
+        // Viewport is less or equal to 700 pixels wide
+        console.log('kurang dari atau sama dengan 425px');
+        isScrollX = true;
+    }
+    else {
+        console.log('lebih dari 425px');
+        isScrollX = false;
+    }
+
+    let table = $('#Table').DataTable(
         {
             //ajax: { url: "https://localhost:44378/API/Employees", dataSrc: '' },
             //dataType: 'json',
@@ -53,7 +64,8 @@
 
             ////}
             dom: 'Bfrtip',
-            //scrollX: 'true',
+            scrollX: isScrollX,
+            //scrollY: 'true',
             buttons: [
                 {
                     extend: 'copyHtml5',
@@ -103,17 +115,19 @@
             ]
 
         });
-    console.log(datatable);
-    datatable.columns.adjust().draw();
+    console.log(isScrollX);
+    //table.columns.adjust().draw();
+
 });
+
 
 function insertKeranjang() {
     // ajax here
     
         Swal.fire({
             icon: 'success',
-            title: 'Berhasil',
-            text: "Dimasukkan ke keranjang"
+            title: 'Sucess',
+            text: "Added to Cart!"
         })
     
 }
@@ -122,7 +136,7 @@ function hapusKeranjang() {
     // ajax here
 
     Swal.fire({
-        title: 'Yakin akan hapus Item?',
+        title: 'Are you sure?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -149,8 +163,8 @@ function BuatRequest() {
     // ajax here
     Swal.fire({
         icon: 'success',
-        title: 'Permohonan Berhasil Diproses',
-        text: "Silahkan tunggu informasi lebih lanjut"
+        title: 'Your request has been proceed',
+        text: "Wait for the futher information"
     })
 }
 
@@ -179,13 +193,13 @@ function deleteBarang() {
     // ajax here
 
     Swal.fire({
-        title: 'Yakin akan hapus Item?',
+        title: 'Are you sure want to delete?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Batal'
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
@@ -231,17 +245,17 @@ function Insert() {
     let ikon, teks, judul;
     if (formatValidation() == 1) {
         ikon = 'success';
-        judul = 'Data Berhasil Ditambahkan';
+        judul = 'Data inserted successfully';
     }
     else if (formatValidation() == -1) {
         ikon = 'error';
-        judul = 'Format gambar salah!';
-        teks = 'Masukkan format yang benar!';
+        judul = 'Wrong image format!';
+        teks = 'Please insert the right format!';
     }
     else {
         ikon = 'error';
-        judul = 'Ukuran gambar terlalu besar!';
-        teks = 'Ukuran gambar harus kurang dari 10 MB!';
+        judul = 'The file is too large!';
+        teks = 'Image must be less than 50 MB!';
     }
 
     Swal.fire({
@@ -253,10 +267,26 @@ function Insert() {
 
 function Edit() {
     // ajax here
-    
+    let ikon, teks, judul;
+    if (formatValidation() == 1) {
+        ikon = 'success';
+        judul = 'Data updated successfully';
+    }
+    else if (formatValidation() == -1) {
+        ikon = 'error';
+        judul = 'Wrong image format!';
+        teks = 'Please insert the right format!';
+    }
+    else {
+        ikon = 'error';
+        judul = 'The file is too large!';
+        teks = 'Image must be less than 50 MB!';
+    }
+
     Swal.fire({
-        icon: 'success',
-        title: 'Data Berhasil Diubah',
+        icon: ikon,
+        title: judul,
+        text: teks,
     })
 }
 
@@ -274,7 +304,7 @@ function formatValidation() {
         fileInput.value = '';
         return -1;
     }
-    if (fileInput.size > 10) {
+    if (fileInput.size > 50) {
         return -2;
     }
     return 1;
