@@ -23,38 +23,20 @@
     <!-- Custom CSS -->
     <link href="~/vendor/css/style.min.css" rel="stylesheet">
     <link href="~/css/StyleSheet.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
     <div class="preloader">
         <div class="lds-ripple">
             <div class="lds-pos"></div>
             <div class="lds-pos"></div>
         </div>
     </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
          data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
                     <a class="navbar-brand" href="#">
                         <!-- Logo icon -->
                         <b class="logo-icon">
@@ -68,18 +50,9 @@
                             <img src="~/vendor/plugins/images/logo-text.png" alt="homepage" />
                         </span>
                     </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
                     <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <ul class="navbar-nav d-none d-md-block d-lg-none">
                         <li class="nav-item">
@@ -87,56 +60,18 @@
                                href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                         </li>
                     </ul>
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
 
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <!--<li>
-                    <div>-->
-                        @*<input type="text" placeholder="Search..." class="form-control mt-0">*@
-                        <!--<a href="" class="active">
-
-                                    <i class=" fas fa-shopping-cart fa-2x" style="color: lightgrey;"></i>
-                                </a>
-                            </div>
-                        </li>-->
-
-                        <li>
-                                <i class=" fas fa-shopping-cart fa-2x" style="color: lightgrey;"></i>
-                            </a>
-                        </div>
-                    </li>-->
-                        @*<li>
-                            <div class="profile-pic m-auto" href="#">
-                                <i class=" fas fa-shopping-cart fa-2x" style="color: lightgrey;"></i>
-                            </div>
-                        </li>*@
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                         <li>
                             <a class="profile-pic" href="#">
                                 <img src="~/vendor/plugins/images/users/varun.jpg" alt="user-img" width="36"
                                      class="img-circle"><span class="text-white font-medium">Steave</span>
                             </a>
                         </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
                     </ul>
                 </div>
             </nav>
         </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -163,16 +98,27 @@
                                 <i class="fas fa-hand-holding" aria-hidden="true"></i>
                                 <span class="hide-menu">Loan</span>
                             </a>
-
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item active">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="Pinjaman"
+                                       aria-expanded="false">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu">My Loan</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="ApprovePinjaman">
+                                        <i class="mdi mdi-adjust"></i>
+                                        <span class="hide-menu"> Approve Loan </span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"  aria-expanded="false">
-
+                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                                 <i class="fas fa-list-alt" aria-hidden="true"></i>
                                 <span class="hide-menu">Bills</span>
                             </a>
-
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item active">
                                     <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="Tagihanku"
@@ -188,7 +134,6 @@
                                     </a>
                                 </li>
                             </ul>
-
                         </li>
                     </ul>
 
@@ -197,16 +142,7 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper" style="min-height: 250px;">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -215,38 +151,14 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
                 @RenderBody()
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
             <footer class="footer text-center">
                 2021 © Ample Admin brought to you by <a href="https://www.wrappixel.com/">wrappixel.com</a>
             </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script src="~/vendor/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="~/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
