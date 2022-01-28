@@ -141,8 +141,8 @@ function hapusKeranjang() {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Batal'
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
@@ -171,18 +171,18 @@ function BuatRequest() {
 function CancelRequest() {
     //ajax here
     Swal.fire({
-        title: 'Yakin akan membatalkan permohonan?',
+        title: 'Are you sure want to cancel request?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Batal'
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
             Swal.fire(
                 'Berhasil!',
-                'Permohonan berhasil dibatalkan',
+                'Request canceled',
                 'success'
             )
         }
