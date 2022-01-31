@@ -1,14 +1,56 @@
 ﻿@{
-    ViewData["Title"] = "My Loan";
+    ViewData["Title"] = "Approve Loan";
     Layout = "_LayoutDashboard";
 }
 <div class="white-box">
     <div class="row">
-
         <div class="col-sm-10">
             <div class="tab-content" id="v-pills-tabContent-right">
                 <div class="tab-pane fade active show" id="v-pills-home2" role="tabpanel"
                      aria-labelledby="v-pills-home-tab2">
+                    <div class="row" style="text-align: center;">
+                        <h2>Request Loan</h2>
+                        <span>Total : 3 </span>
+                    </div>
+                    <div class="row" style="margin-top:25px">
+                        <div class="row">
+                            <div class="col">
+                                <table id="pinjamanTable" class="table table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Start Date</th>
+                                            <th scope="col">End Date</th>
+                                            <th scope="col">Keperluan</th>
+                                            <th scope="col">Approval</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbEmployeesBody">
+                                        <tr>
+                                            <td scope="col">1</td>
+                                            <td scope="col">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#pinjamanActiveModal"><i class="fas fa-info-circle"></i></button>
+                                                    <button type="button" class="btn btn-success" onclick="approved()"><i class="fas fa-check"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="rejected()"><i class="fas fa-times"></i></button>
+                                                </div>
+                                            </td>
+                                            <td scope="col">14-03-2022</td>
+                                            <td scope="col">15-03-2022</td>
+                                            <td scope="col">
+                                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+                                            </td>
+                                            <td scope="col">Progress</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-profile2" role="tabpanel"
+                     aria-labelledby="v-pills-profile-tab2">
                     <div class="row" style="text-align: center;">
                         <h2>Pinjaman Active</h2>
                         <span>Total : 3 </span>
@@ -52,6 +94,61 @@
                 </div>
                 <div class="tab-pane fade" id="v-pills-settings2" role="tabpanel"
                      aria-labelledby="v-pills-settings-tab2">
+                    <div class="row" style="text-align: center;">
+                        <h2>Return Request</h2>
+                        <span>Total : 3 </span>
+                    </div>
+                    <div class="row" style="margin-top:25px">
+                        <div class="row">
+                            <div class="col">
+                                <table id="historyTable" class="table table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">No</th>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Start Date</th>
+                                            <th scope="col">End Date</th>
+                                            <th scope="col">Keperluan</th>
+                                            <th scope="col">Approval</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbEmployeesBody">
+                                        <tr>
+                                            <td scope="col">1</td>
+                                            <td scope="col">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#historyPinjamanModal"><i class="fas fa-info-circle"></i></button>
+                                                </div>
+                                            </td>
+                                            <td scope="col">12-01-2022</td>
+                                            <td scope="col">14-01-2022</td>
+                                            <td scope="col">
+                                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod
+                                            </td>
+                                            <td scope="col">Approval</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="col">2</td>
+                                            <td scope="col">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i></button>
+                                                </div>
+                                            </td>
+                                            <td scope="col">11-01-2022</td>
+                                            <td scope="col">12-01-2022</td>
+                                            <td scope="col">
+                                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod
+                                            </td>
+                                            <td scope="col">Approval</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-setting2" role="tabpanel"
+                     aria-labelledby="v-pills-setting-tab2">
                     <div class="row" style="text-align: center;">
                         <h2>History Pinjaman</h2>
                         <span>Total : 3 </span>
@@ -115,17 +212,30 @@
                 <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill"
                    href="#v-pills-home2" role="tab" aria-controls="v-pills-home2"
                    aria-selected="true">
-                    <i class=" fas fa-home mdi mdi-home-variant d-lg-none d-block me-1"></i>
-                    <span class="d-none d-lg-block">Pinjaman Active</span>
+                    <i class="mdi mdi-home-variant d-lg-none d-block me-1"></i>
+                    <span class="d-none d-lg-block">Request Loan</span>
+                </a>
+                <a class="nav-link" id="v-pills-profile-tab2" data-bs-toggle="pill"
+                   href="#v-pills-profile2" role="tab" aria-controls="v-pills-profile2"
+                   aria-selected="false">
+                    <i class="mdi mdi-account-circle d-lg-none d-block me-1"></i>
+                    <span class="d-none d-lg-block">Active Loan</span>
                 </a>
                 <a class="nav-link" id="v-pills-settings-tab2" data-bs-toggle="pill"
                    href="#v-pills-settings2" role="tab" aria-controls="v-pills-settings2"
+                   aria-selected="false">
+                    <i class="mdi mdi-settings-outline d-lg-none d-block me-1"></i>
+                    <span class="d-none d-lg-block">Return Request</span>
+                </a>
+                <a class="nav-link" id="v-pills-setting-tab2" data-bs-toggle="pill"
+                   href="#v-pills-setting2" role="tab" aria-controls="v-pills-setting2"
                    aria-selected="false">
                     <i class="mdi mdi-settings-outline d-lg-none d-block me-1"></i>
                     <span class="d-none d-lg-block">History</span>
                 </a>
             </div>
         </div>
+        <!-- end col-->
     </div>
 </div>
 
@@ -363,5 +473,5 @@
 
 
 @section scripts {
-    <script type="text/javascript" src="~/js/pinjaman.js"></script>
+    @*<script type="text/javascript" src="~/js/pinjaman.js"></script>*@
 }
