@@ -78,7 +78,8 @@ namespace API_project.Repository.data
             {
                 ID = formattedIdACC,
                 Email = registerVM.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(registerVM.Password)
+                Password = BCrypt.Net.BCrypt.HashPassword(registerVM.Password),
+                EmployeeID = formattedIdEMP
             };
             myContext.Accounts.Add(account);
             myContext.SaveChanges();
