@@ -38,9 +38,11 @@ namespace API_project.Controllers.data
                     return Ok(new JwtTokenVM { status = HttpStatusCode.BadRequest, Token = null, message = "Email Belum Terdaftar" });
                 case 1:
                     var getRole = accountRepository.GetRoles(loginVM.Email);
+                    var getEmployee = accountRepository.GetEmployees(loginVM.Email);
                     var claims = new List<Claim>
                     {
-                        new Claim("Email", loginVM.Email)
+                        new Claim("Name", getEmployee.FirstName + " " + getEmployee.LastName),
+                        new Claim("EmployeeID", getEmployee.ID)
                     };
                     foreach (var role in getRole)
                     {

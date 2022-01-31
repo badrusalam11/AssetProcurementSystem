@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\Data\" />
+    <ProjectReference Include="..\API-project\API-project.csproj" />
   </ItemGroup>
 
 </Project>

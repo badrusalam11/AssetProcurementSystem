@@ -21,19 +21,26 @@ namespace API_project.Repository.data
             if (email != null)
             {
                 var account = myContext.Accounts.Where(a => a.ID == email.ID).FirstOrDefault();
-                //if (BCrypt.Net.BCrypt.Verify(loginVM.Password, account.Password))
-                //{
+                if (BCrypt.Net.BCrypt.Verify(loginVM.Password, account.Password))
+                {
                     return 1;
-                //}
-                //return 6;
+                }
+                return 6;
             }
             return 0;
         }
         public IEnumerable<Object> GetRoles(string mail)
         {
             var cek = myContext.Accounts.Where(a => a.Email == mail).FirstOrDefault();
-            var role = myContext.AccountRoles.Where(a => a.ID == cek.ID).Select(ar => ar.Role.Name).ToList();
+            var role = myContext.AccountRoles.Where(a => a.AccountID == cek.ID).Select(ar => ar.Role.Name).ToList();
             return role;
+        }
+
+        public Employee GetEmployees(string mail)
+        {
+            var account = myContext.Accounts.Where(a => a.Email == mail).FirstOrDefault();
+            var employee = myContext.Employees.Where(a => a.ID == account.EmployeeID).FirstOrDefault();
+            return employee;
         }
     }
 }
