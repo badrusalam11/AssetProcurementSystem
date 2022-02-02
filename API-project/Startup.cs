@@ -69,8 +69,8 @@ namespace API_project
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("API")));
-            //services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("API")));
+            //services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("API")));
+            services.AddDbContext<MyContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("API")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

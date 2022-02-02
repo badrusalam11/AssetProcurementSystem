@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +19,7 @@ namespace API_project.Models
         public string Image { get; set; }
         public Boolean IsActive  { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Type Type { get; set; }
         public string TypeID { get; set; }
         [JsonIgnore]

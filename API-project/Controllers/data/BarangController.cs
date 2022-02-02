@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace API_project.Controllers.data
@@ -18,5 +19,45 @@ namespace API_project.Controllers.data
         {
             this.barangRepository = barangRepository;
         }
+
+
+        [HttpGet]
+        [Route("GetAllBarang")]
+        public ActionResult<Object> GetAllBarang()
+        {
+            var result = barangRepository.GetAllBarang();
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return Ok(new { status = HttpStatusCode.NotFound, message = "Error data not found" });
+
+        }
+
+        [HttpPost]
+        [Route("InsertBarang")]
+        public ActionResult InsertBarang(Barang barang)
+        {
+            var response = barangRepository.InsertBarang(barang);
+            if (response == 1)
+            {
+                return Ok(new { status = HttpStatusCode.OK, response, message = "Berhasil Input Data" });
+            }
+            return BadRequest(new { status = HttpStatusCode.BadRequest, response, message = "Gagal Memasukkan Data" });
+        }
+
+
+        [HttpDelete]
+        [Route("DeleteBarang/{id}")]
+        public ActionResult DeleteBarang(string id)
+        {
+            var response = barangRepository.DeleteBarang(id);
+            if (response == 1)
+            {
+                return Ok(new { status = HttpStatusCode.OK, response, message = "Berhasil Delete Data" });
+            }
+            return BadRequest(new { status = HttpStatusCode.BadRequest, response, message = "Gagal Delete Data" });
+        }
+
     }
 }

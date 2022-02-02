@@ -32,6 +32,7 @@ namespace Client_project
         {
             services.AddControllersWithViews();
             services.AddScoped<LoginRepository>();
+            services.AddScoped<BarangRepository>();
             services.AddScoped<Address>();
             services.AddMvc().AddNewtonsoftJson();
             services.AddSession();
