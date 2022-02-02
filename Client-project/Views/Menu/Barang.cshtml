@@ -20,23 +20,15 @@
                 <th scope="col">No.</th>
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
-                @*<th scope="col">Gambar</th>
-                <th scope="col">Deskripsi</th>*@
                 <th scope="col">Condition</th>
                 <th scope="col">Action</th>
-                @*<th scope="col">Special Action</th>*@
             </tr>
         </thead>
         <tbody class="TableBody">
-            <tr>
+            @*<tr>
                 <td scope="col">1</td>
                 <td scope="col">Laptop ASUS Zen 1234</td>
                 <td scope="col">Elektronika</td>
-                @*<td scope="col">
-                    <img class="figure-img img-fluid rounded" src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg"
-                         alt="Alternate Text" />
-                </td>
-                <td scope="col">loremipsumadaoksdoakdksajvkdsdjvdsoijfio</td>*@
                 <td scope="col">Bagus</td>
                 <td scope="col">
                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -45,18 +37,8 @@
                         <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit()"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-danger text-white"><i class="fas fa-trash" onclick="deleteBarang()"></i></button>
                     </div>
-                    @*<br />
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        
-                    </div>*@
-
                 </td>
-                @*<td class="col">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        
-                    </div>
-                </td>*@
-            </tr>
+            </tr>*@
         </tbody>
     </table>
 </div>
@@ -74,25 +56,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-6">
-                            <img class="figure-img img-fluid rounded"
-                                 src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
+                            <img id="detailImg" class="figure-img img-fluid rounded"
+                                 @*src="~/img/asus.jpg"*@ 
+                                 alt="Alternate Text" />
                         </div>
                         <div class="col-6">
                             <table>
                                 <tr>
                                     <td>Name</td>
                                     <td>:</td>
-                                    <td>Laptop</td>
+                                    <td id="detailName"></td>
                                 </tr>
                                 <tr>
                                     <td>Category</td>
                                     <td>:</td>
-                                    <td>Elektronik</td>
+                                    <td id="detailType"></td>
                                 </tr>
                                 <tr>
                                     <td>Condition</td>
                                     <td>:</td>
-                                    <td>Available</td>
+                                    <td id="detailKeterangan"></td>
                                 </tr>
 
 
@@ -100,7 +83,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <p>Description :</p><textarea class="form-control" rows="5" cols="15" readonly>loremipsumadaoksdoakdksajvkdsdjvdsosadasdadadasdadijfosaodksoa</textarea>
+                        <p>Description :</p><textarea id="detailDeskripsi" class="form-control" rows="5" cols="15" readonly></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -125,7 +108,7 @@
                         <div class="row">
                             <div class="col-2">
                                 <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
+                                     src="~/img/asus.jpg" alt="Alternate Text" />
                             </div>
                             <div class="col-8">
                                 <p>Laptop Asus </p>
@@ -173,39 +156,42 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="" id="formBarang">
+                <form id="formBarang" enctype="multipart/form-data">
+                <input type="text" id="barangId" name="ID" value="" class="form-control" hidden/>
                     <div class="container text-center">
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col">
                                 <label>Item Name</label>
-                                <input type="text" id="barangName" value="" class="form-control" required />
+                                <input type="text" id="barangName" name="Name" value="" class="form-control" required />
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-6">
                                 <label>Type</label>
-                                <select id="barangTipe" class="form-select" required>
-                                    @*<option selected>Choose..</option>*@
-                                    <option value="1">Electronics</option>
+                                <select id="barangTipe" name="TypeID" class="form-select" required>
+                                    @*<option value="1">Electronics</option>
                                     <option value="2">Office stationery(ATK)</option>
-                                    <option value="3">Furniture</option>
+                                    <option value="3">Furniture</option>*@
                                 </select>
                             </div>
                             <div class="col">
                                 <label>Condition</label>
-                                <input type="text" id="barangKeterangan" value="" class="form-control" required />
+                                <input type="text" id="barangKeterangan" name="Keterangan" value="" class="form-control" required />
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col">
                                 <label for="barangDeskripsi">Description</label>
-                                <textarea class="form-control" id="barangDeskripsi" required></textarea>
+                                <textarea class="form-control" id="barangDeskripsi" name="Deskripsi" required></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <label for="barangGambar" class="form-label">Image</label>
-                                <input class="form-control" type="file" id="barangGambar" accept="image/*">
+                                <br />
+                                <img id="barangImg" class="figure-img img-fluid rounded w-25 border" src="file_you_choose">
+                                <input class="form-control" name="Image"  onchange="file_changed()" type="file" id="barangGambar" value="" accept="image/*">
+                                <input class="form-control" name="Image" type="text" id="barangGambar1" value="" accept="image/*" hidden>
                             </div>
                         </div>
                     </div>
