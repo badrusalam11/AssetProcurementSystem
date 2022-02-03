@@ -36,14 +36,33 @@
                     data: null,
                     bSortable: false,
                     render: function (data, type, row) {
-                        return `
-                    <div class="btn-group" role="group" aria-label="Basic example">
+                        let Id = [];
+                        if (localStorage.getItem('Id')) {
+                            Id = JSON.parse(localStorage.getItem('Id'));
+                        }
+
+                        if (jQuery.inArray(row['id'], Id) != -1) {
+                            console.log("is in array");
+                            return `
+                    <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
+                        <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
+                        <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')" disabled><i class="fas fa-cart-plus"></i></button>
+                        <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit('${row['id']}')"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger text-white"  onclick="deleteBarang('${row['id']}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                        `;
+                        } else {
+                            console.log("is NOT in array");
+                            return `
+                    <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                         <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
                         <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')"><i class="fas fa-cart-plus"></i></button>
                         <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit('${row['id']}')"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-danger text-white"  onclick="deleteBarang('${row['id']}')"><i class="fas fa-trash"></i></button>
                     </div>
                         `;
+                        }
+                        
                     }
                 },
             ],
@@ -106,23 +125,23 @@
 
 });
 
-window.onload = function (event) {
-    // disable button keranjang
-    //get localstorage
-    let Id = [];
-    if (localStorage.getItem('Id')) {
-        Id = JSON.parse(localStorage.getItem('Id'));
-    }
+//window.onload = function (event) {
+//    // disable button keranjang
+//    //get localstorage
+//    let Id = [];
+//    if (localStorage.getItem('Id')) {
+//        Id = JSON.parse(localStorage.getItem('Id'));
+//    }
 
-    for (var i = 0; i < Id.length; i++) {
-        let selector = "#" + Id[i].toString();
-        $(selector).prop("disabled", true);
-        //$("#show").prop("disabled", true);
-        //$("#inibarang").html(selector);
-        console.log(selector);
-    }
+//    for (var i = 0; i < Id.length; i++) {
+//        let selector = "#" + Id[i].toString();
+//        $(selector).prop("disabled", true);
+//        //$("#show").prop("disabled", true);
+//        //$("#inibarang").html(selector);
+//        console.log(selector);
+//    }
     
-};
+//};
 
 function Keranjang() {
     let Id = [];
@@ -201,7 +220,10 @@ function insertKeranjang(id) {
         title: 'Sucess',
         text: "Added to Cart!"
     })
-    location.reload();
+    //location.reload();
+    //load tabel
+    let table = $('#Table').DataTable();
+    table.ajax.reload();
 }
 
 function removeA(arr) {
@@ -235,15 +257,17 @@ function hapusKeranjang(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             //localStorage.removeItem("Id");
-            removeA(Id, id);
-            localStorage.setItem('Id', JSON.stringify(Id));
-
             Swal.fire(
                 'Deleted!',
                 'Your item has been deleted.',
                 'success'
-            );
-            location.reload();
+            ).then((result) => {
+                if (result.isConfirmed) {
+                    removeA(Id, id);
+                    localStorage.setItem('Id', JSON.stringify(Id));
+                    location.reload();
+                }
+            });
         }
     });
 
@@ -277,7 +301,19 @@ function BuatRequest() {
             icon: 'success',
             title: 'Your request has been proceed',
             text: "Wait for the futher information"
-        })
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // hapus local storage
+                localStorage.removeItem("Id");
+                // load halaman
+                location.reload();
+            }
+        });
+
+        //// hapus local storage
+        //localStorage.removeItem("Id");
+        //// load halaman
+        //location.reload();
 
     }).fail((error) => {
         //alert pemberitahuan jika gagal
@@ -304,8 +340,16 @@ function CancelRequest() {
                 'Success!',
                 'Request canceled',
                 'success'
-            );
-            location.reload();
+            ).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    // hapus local storage
+                    localStorage.removeItem("Id");
+                    // load halaman
+                    location.reload();
+                }
+            });
+           
 
         }
     });
