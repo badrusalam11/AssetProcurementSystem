@@ -18,6 +18,8 @@ namespace API_project.Models
         [JsonIgnore]
         public virtual Nota Nota { get; set; }
         public string NotaID { get; set; }
+        public DateTime UploadDate { get; set; }
+        public Boolean IsConfirm { get; set; }
         [JsonIgnore]
         public virtual Pengembalian Pengembalian  { get; set; }
         public string PengembalianID { get; set; }

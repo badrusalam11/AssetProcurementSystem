@@ -13,6 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Migrations\20220203163939_EditModelTagihan.cs" />
+    <Compile Include="Migrations\20220203163939_EditModelTagihan.Designer.cs" />
+    <Compile Include="Migrations\20220203172932_EditNotaTagihan.cs" />
+    <Compile Include="Migrations\20220203172932_EditNotaTagihan.Designer.cs" />
+    <Compile Include="Migrations\MyContextModelSnapshot.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.22" />
@@ -24,10 +32,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 
