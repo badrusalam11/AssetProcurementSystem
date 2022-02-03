@@ -266,6 +266,7 @@ function setItemHistory(pinjaman) {
     console.log(pinjaman)
     var text = "";
     $.each(pinjaman, function (key, val) {
+        const returndate = val.pengembalian.tanggalKembali.split("T");
         text += `
                         <div class="row"  style="margin-top: 20px;">
                             <div class="col-2" id="imgItem">
@@ -292,12 +293,12 @@ function setItemHistory(pinjaman) {
                                                  aria-labelledby="v-pills-profile-tab2">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label>Tangal Kembali</label>
-                                                        <input type="datetime" class="form-control" readonly />
+                                                        <label>Return Date</label>
+                                                        <input type="date" class="form-control" value="${returndate[0]}" readonly />
                                                         <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
+                                                        <input type="text" class="form-control" value="${val.pengembalian.deskripsiKondisi}" readonly />
                                                         <label>Kondisi</label>
-                                                        <input type="text" class="form-control" value="Baik" readonly />
+                                                        <input type="text" class="form-control" value="${val.pengembalian.kondisiBarang}" value="Baik" readonly />
                                                     </div>
                                                 </div>
                                             </div>

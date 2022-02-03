@@ -50,6 +50,8 @@ $(document).ready(function () {
                         </div>`;
                 }
             }, {
+                'data': 'name'
+            }, {
                 'data': null,
                 'render': (data, type, row) => {
                     var dateGet = new Date(row['startDate']);
@@ -143,6 +145,8 @@ $(document).ready(function () {
                             <button type="button" class="btn btn-warning" onclick="RequestPengembalian('${row['id']}')"><i class="fas fa-undo-alt"></i></button>
                         </div>`;
                 }
+            }, {
+                'data': 'name'
             }, {
                 'data': null,
                 'render': (data, type, row) => {
@@ -238,6 +242,8 @@ $(document).ready(function () {
                         </div>`;
                 }
             }, {
+                'data': 'name'
+            }, {
                 'data': null,
                 'render': (data, type, row) => {
                     var dateGet = new Date(row['startDate']);
@@ -330,6 +336,8 @@ $(document).ready(function () {
                             <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#historyPinjamanModal" onclick="HistoryLoan('${row['id']}')"><i class="fas fa-info-circle"></i></button>
                         </div>`;
                 }
+            }, {
+                'data': 'name'
             }, {
                 'data': null,
                 'render': (data, type, row) => {
@@ -526,6 +534,7 @@ function setHistoryLoan(data) {
 function setItemHistory(pinjaman) {
     var text = "";
     $.each(pinjaman, function (key, val) {
+        const returndate = val.pengembalian.tanggalKembali.split("T");
         text += `
                         <div class="row"  style="margin-top: 20px;">
                             <div class="col-2" id="imgItem">
@@ -552,12 +561,12 @@ function setItemHistory(pinjaman) {
                                                  aria-labelledby="v-pills-profile-tab2">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label>Tangal Kembali</label>
-                                                        <input type="datetime" class="form-control" readonly />
+                                                        <label>Return Date</label>
+                                                        <input type="date" class="form-control" value="${returndate[0]}" readonly />
                                                         <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
+                                                        <input type="text" class="form-control" value="${val.pengembalian.deskripsiKondisi}" readonly />
                                                         <label>Kondisi</label>
-                                                        <input type="text" class="form-control" value="Baik" readonly />
+                                                        <input type="text" class="form-control" value="${val.pengembalian.kondisiBarang}" value="Baik" readonly />
                                                     </div>
                                                 </div>
                                             </div>
@@ -653,13 +662,13 @@ function FormReturn(id) {
     $.ajax({
         url: 'https://localhost:44331/Api/Peminjaman/Loan/Detail/' + id
     }).done((result) => {
-        setFormReturn(result[0].pinjaman)
+        setFormReturn(result[0].pinjaman, result[0].id)
     }).fail((error) => {
         console.log(error);
     });
 }
 
-function setFormReturn(data) {
+function setFormReturn(data, id) {
     var text = "";
     $.each(data, function (key, val) {
         text += `     <div class="row"  style="margin-top: 20px;">
@@ -713,7 +722,8 @@ function setFormReturn(data) {
                                                         <input type="text" class="form-control" name="description" id="${`description` + val.barang.id}" />
                                                         <label id="${`labelCost` + val.barang.id}" hidden >Cost of Repairs</label>
                                                         <input type="text" class="form-control" name="cost" id="${`cost` + val.barang.id}" hidden />
-
+                                                        <input type="text" class="form-control" name="peminjamanID" id="${`peminjamanID` + val.barang.id}" value="${val.id}" hidden />
+                                                        <input type="text" class="form-control" name="reqID" id="reqID" value="${id}" hidden />
                                                     </div>
                                                 </div>
                                             </div>
@@ -733,6 +743,87 @@ function badCondition(value, id) {
         $("#labelCost" + id).prop("hidden", true);
         $("#cost" + id).prop("hidden", true);
     }
+}
+
+function getFormReturn() {
+    var id = $("#reqID").val();
+    $.ajax({
+        url: 'https://localhost:44331/Api/Peminjaman/Loan/Detail/' + id
+    }).done((result) => {
+        var idPinjaman = result[0].pinjaman;
+        let newReturn = [];
+        $.each(idPinjaman, function (key, val) {
+            //console.log(val.id)
+            var kondisi = $("#condition" + val.barang.id).val();
+            if (kondisi == "false") {
+                let returnItem = new Object();
+                returnItem.ID = $("#peminjamanID" + val.barang.id).val();
+                returnItem.ReturnDate = $("#returnDate" + val.barang.id).val();
+                returnItem.Kondisi = $("#condition" + val.barang.id).val();
+                returnItem.Description = $("#description" + val.barang.id).val();
+                returnItem.Cost = parseInt($("#cost" + val.barang.id).val());
+
+                newReturn.push(returnItem);
+            } else {
+                let returnItem = new Object();
+                returnItem.ID = $("#peminjamanID" + val.barang.id).val();
+                returnItem.ReturnDate = $("#returnDate" + val.barang.id).val();
+                returnItem.Kondisi = $("#condition" + val.barang.id).val();
+                returnItem.Description = $("#description" + val.barang.id).val();
+                returnItem.Cost = null;
+
+                newReturn.push(returnItem);
+            }
+        });
+        let params = new Object();
+        params.RequestID = id;
+        params.ItemReturn = newReturn;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Are you sure you want to approved a return?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, approved it!'
+        }).then((result) => {
+            if (result.isDismissed == true) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Cancel',
+                    text: 'Approval canceled !',
+                    type: 'cancel'
+                });
+            } else {
+                insertReturnForm(params)
+            }
+        })
+    }).fail((error) => {
+        console.log(error);
+    });
+}
+
+function insertReturnForm(params) {
+    myJSON = JSON.stringify(params);
+    $.ajax({
+        url: "https://localhost:44331/API/Pengembalian/Loan/InsertReturn",
+        contentType: "application/json;charset=utf-8",
+        type: "POST",
+        data: myJSON
+    }).done((result) => {
+        console.log("Result INsert", result);
+        Swal.fire(
+            'Success!',
+            'This request has been Success.',
+            'success'
+        );
+        $('#requestLoanTable').DataTable().ajax.reload();
+        $('#pinjamanActiveTable').DataTable().ajax.reload();
+        $('#returLoanTable').DataTable().ajax.reload();
+        $('#historyTable').DataTable().ajax.reload();
+    }).fail((error) => {
+        console.log(error);
+    })
 }
 
 function updateStatusApproval(data) {
