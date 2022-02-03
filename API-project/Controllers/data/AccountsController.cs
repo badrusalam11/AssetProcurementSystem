@@ -54,7 +54,7 @@ namespace API_project.Controllers.data
                             _configuration["Jwt:Issuer"],
                             _configuration["Jwt:Audience"],
                             claims,
-                            expires: DateTime.UtcNow.AddMinutes(10),
+                            expires: DateTime.UtcNow.AddMinutes(60),
                             signingCredentials: signIn
                         );
                     var idToken = new JwtSecurityTokenHandler().WriteToken(token);

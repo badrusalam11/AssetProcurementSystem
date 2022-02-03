@@ -33,6 +33,8 @@ namespace Client_project
             services.AddControllersWithViews();
             services.AddScoped<LoginRepository>();
             services.AddScoped<BarangRepository>();
+            services.AddScoped<EmployeeRepository>();
+            services.AddScoped<RequestPeminjamanRepository>();
             services.AddScoped<Address>();
             services.AddMvc().AddNewtonsoftJson();
             services.AddSession();
@@ -90,15 +92,15 @@ namespace Client_project
 
                 if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
                 {
-                    response.Redirect("/PageError/Unauthorized401");
+                    response.Redirect("/error/unauthorized");
                 }
                 else if (response.StatusCode.Equals((int)HttpStatusCode.NotFound))
                 {
-                    response.Redirect("/PageError/NotFound404");
+                    response.Redirect("/error/notfound");
                 }
                 else if (response.StatusCode.Equals((int)HttpStatusCode.Forbidden))
                 {
-                    response.Redirect("/PageError/Forbiden403");
+                    response.Redirect("/error/forbidden");
                 }
             });
 
@@ -109,7 +111,7 @@ namespace Client_project
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Menu}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

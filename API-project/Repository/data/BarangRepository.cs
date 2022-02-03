@@ -20,7 +20,7 @@ namespace API_project.Repository.data
             return myContext.Barangs.Where(b => b.IsActive == true).ToList();
         }
 
-            public int InsertBarang(Barang barang)
+        public int InsertBarang(Barang barang)
         {
             int increment = myContext.Barangs.ToList().Count;
             string formattedId = "";
@@ -50,7 +50,7 @@ namespace API_project.Repository.data
             var response = myContext.SaveChanges();
             return response;
         }
-        
+
         public int DeleteBarang (string id)
         {
             var user = new Barang { ID = id, IsActive =  false};
