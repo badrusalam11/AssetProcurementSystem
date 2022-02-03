@@ -61,12 +61,14 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
-
-                        <li>
-                            <a class="profile-pic" href="#">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle profile-pic" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="~/vendor/plugins/images/users/varun.jpg" alt="user-img" width="36"
                                      class="img-circle"><span class="text-white font-medium">Steave</span>
                             </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="/Login/Logout">Logout</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

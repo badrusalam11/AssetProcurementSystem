@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,13 +16,14 @@ namespace API_project.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Keperluan { get; set; }
-        public Approval Approval { get; set; }
+        public int Approval { get; set; }
+        public int Loan { get; set; }
         [JsonIgnore]
         public virtual Account Account  { get; set; }
         public string AccountID { get; set; }
         [JsonIgnore]
         public virtual ICollection<Peminjaman> Peminjaman { get; set; }
-
     }
     public enum Approval { Approved, Rejected, Pennding}
+    public enum Loan { Pennding, Active, Returned, Cancel}
 }
