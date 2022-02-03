@@ -6,11 +6,12 @@
     <div class="row">
         <div class="col-sm-10">
             <div class="tab-content" id="v-pills-tabContent-right">
+
+                <!-- REQUEST LOAN -->
                 <div class="tab-pane fade active show" id="v-pills-home2" role="tabpanel"
                      aria-labelledby="v-pills-home-tab2">
                     <div class="row" style="text-align: center;">
                         <h2>Request Loan</h2>
-                        <span>Total : 3 </span>
                     </div>
                     <div class="row" style="margin-top:25px">
                         <div class="row">
@@ -23,14 +24,12 @@
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
                                             <th scope="col">Item</th>
-                                            <th scope="col">Keperluan</th>
                                             <th scope="col">Approval</th>
                                             <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbEmployeesBody">
                                         <tr>
-
                                         </tr>
                                     </tbody>
                                 </table>
@@ -38,11 +37,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Active Loan -->
                 <div class="tab-pane fade" id="v-pills-profile2" role="tabpanel"
                      aria-labelledby="v-pills-profile-tab2">
                     <div class="row" style="text-align: center;">
-                        <h2>Pinjaman Active</h2>
-                        <span>Total : 3 </span>
+                        <h2>Active Loan</h2>
                     </div>
                     <div class="row" style="margin-top:25px">
                         <div class="row">
@@ -55,7 +55,6 @@
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
                                             <th scope="col">Item</th>
-                                            <th scope="col">Keperluan</th>
                                             <th scope="col">Approval</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -69,11 +68,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Return Request -->
                 <div class="tab-pane fade" id="v-pills-settings2" role="tabpanel"
                      aria-labelledby="v-pills-settings-tab2">
                     <div class="row" style="text-align: center;">
                         <h2>Return Request</h2>
-                        <span>Total : 3 </span>
                     </div>
                     <div class="row" style="margin-top:25px">
                         <div class="row">
@@ -86,14 +86,12 @@
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
                                             <th scope="col">Item</th>
-                                            <th scope="col">Keperluan</th>
                                             <th scope="col">Approval</th>
                                             <th scope="col">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody class="tbEmployeesBody">
                                         <tr>
-                                            
                                         </tr>
                                     </tbody>
                                 </table>
@@ -101,11 +99,12 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- History Loan -->
                 <div class="tab-pane fade" id="v-pills-setting2" role="tabpanel"
                      aria-labelledby="v-pills-setting-tab2">
                     <div class="row" style="text-align: center;">
-                        <h2>History Pinjaman</h2>
-                        <span>Total : 3 </span>
+                        <h2>History Loan</h2>
                     </div>
                     <div class="row" style="margin-top:25px">
                         <div class="row">
@@ -118,7 +117,6 @@
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
                                             <th scope="col">Item</th>
-                                            <th scope="col">Keperluan</th>
                                             <th scope="col">Approval</th>
                                             <th scope="col">Status</th>
                                         </tr>
@@ -158,6 +156,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             <!-- end tabcontent-->
         </div>
@@ -208,54 +207,22 @@
                     <div class="col-12">
                         <h4>Item</h4>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-8">
-                                <div class="col">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Spesification</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Deskripsi</label>
-                                    <input type="text" class="form-control" readonly />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-8">
-                                <div class="col">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Spesification</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Deskripsi</label>
-                                    <input type="text" class="form-control" readonly />
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-12" id="itemLoan">
+
                     </div>
-                    <span>Total Item : </span>
                 </div>
                 <div class="row mt-2">
                     <div class="col">
-                        <label>Keperluan</label>
-                        <input type="text" class="form-control" name="keperluan" id="keperluan" value="" readonly />
-                        <label>Dipinjam dari</label>
-                        <input type="date" class="form-control" readonly />
-                        <label>Hingga</label>
-                        <input type="date" class="form-control" readonly />
+                        <label>Needs</label>
+                        <input type="text" class="form-control" name="keperluan" id="keperluan" value="" />
+                        <label>Start Date</label>
+                        <input type="date" class="form-control" name="startDate" id="startDate" value="" />
+                        <label>End Date</label>
+                        <input type="date" class="form-control" name="endtDate" id="endDate" value="" />
                         <label>Approval</label>
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" class="form-control" name="approval" id="approval" value="" readonly />
                         <label>Status</label>
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" class="form-control" name="status" id="status" value="" readonly />
                     </div>
 
                 </div>
@@ -280,142 +247,22 @@
                     <div class="col-12">
                         <h4>Item</h4>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        <div class="tab-content" id="v-pills-tabContent-right">
-                                            <div class="tab-pane fade active show" id="v-pills2" role="tabpanel"
-                                                 aria-labelledby="v-pills-home-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Spesification</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="v-pill2" role="tabpanel"
-                                                 aria-labelledby="v-pills-profile-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Tangal Kembali</label>
-                                                        <input type="datetime" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Kondisi</label>
-                                                        <input type="text" class="form-control" value="Baik" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end tabcontent-->
-                                    </div>
-                                    <!-- end col-->
-                                    <div class="col-sm-3 mt-2 mt-sm-0">
-                                        <div class="nav flex-column nav-pills" id="v-pills-tab2" role="tablist"
-                                             aria-orientation="vertical">
-                                            <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill"
-                                               href="#v-pills2" role="tab" aria-controls="v-pills-home2"
-                                               aria-selected="true">
-                                                <i class="mdi mdi-home-variant d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Peminjaman</span>
-                                            </a>
-                                            <a class="nav-link" id="v-pills-profile-tab2" data-bs-toggle="pill"
-                                               href="#v-pill2" role="tab" aria-controls="v-pills-profile2"
-                                               aria-selected="false">
-                                                <i class="mdi mdi-account-circle d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Pengembalian</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- end col-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        <div class="tab-content" id="v-pills-tabContent-right">
-                                            <div class="tab-pane fade active show" id="v-home2" role="tabpanel"
-                                                 aria-labelledby="v-pills-home-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Spesification</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="v-profile2" role="tabpanel"
-                                                 aria-labelledby="v-pills-profile-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Tangal Kembali</label>
-                                                        <input type="datetime" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Kondisi</label>
-                                                        <input type="text" class="form-control" value="Baik" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end tabcontent-->
-                                    </div>
-                                    <!-- end col-->
-                                    <div class="col-sm-3 mt-2 mt-sm-0">
-                                        <div class="nav flex-column nav-pills" id="v-pills-tab2" role="tablist"
-                                             aria-orientation="vertical">
-                                            <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill"
-                                               href="#v-home2" role="tab" aria-controls="v-pills-home2"
-                                               aria-selected="true">
-                                                <i class="mdi mdi-home-variant d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Peminjaman</span>
-                                            </a>
-                                            <a class="nav-link" id="v-pills-profile-tab2" data-bs-toggle="pill"
-                                               href="#v-profile2" role="tab" aria-controls="v-pills-profile2"
-                                               aria-selected="false">
-                                                <i class="mdi mdi-account-circle d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Pengembalian</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- end col-->
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-12" id="historyItem">
+
                     </div>
-                    <span>Total Item : </span>
                 </div>
                 <div class="row mt-2">
                     <div class="col">
-                        <label>Keperluan</label>
-                        <input type="text" class="form-control" name="keperluan" id="keperluan" value="" readonly />
-                        <label>Dipinjam dari</label>
-                        <input type="date" class="form-control" readonly />
-                        <label>Hingga</label>
-                        <input type="date" class="form-control" readonly />
+                        <label>Needs</label>
+                        <input type="text" class="form-control" name="keperluan" id="keperluanH" value="" />
+                        <label>Start Date</label>
+                        <input type="date" class="form-control" name="startDate" id="startDateH" value="" />
+                        <label>End Date</label>
+                        <input type="date" class="form-control" name="endtDate" id="endDateH" value="" />
                         <label>Approval</label>
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" class="form-control" name="approval" id="approvalH" value="" readonly />
                         <label>Status</label>
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" class="form-control" name="status" id="statusH" value="" readonly />
                     </div>
                 </div>
             </div>
@@ -426,11 +273,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="historyPinjamanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- MODAL FORM RETURN REQUEST -->
+<div class="modal fade" id="formReturnModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Pinjaman</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Return Request</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -438,152 +286,18 @@
                     <div class="col-12">
                         <h4>Item</h4>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        <div class="tab-content" id="v-pills-tabContent-right">
-                                            <div class="tab-pane fade active show" id="v-pills2" role="tabpanel"
-                                                 aria-labelledby="v-pills-home-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Spesification</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="v-pill2" role="tabpanel"
-                                                 aria-labelledby="v-pills-profile-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Tangal Kembali</label>
-                                                        <input type="datetime" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Kondisi</label>
-                                                        <input type="text" class="form-control" value="Baik" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end tabcontent-->
-                                    </div>
-                                    <!-- end col-->
-                                    <div class="col-sm-3 mt-2 mt-sm-0">
-                                        <div class="nav flex-column nav-pills" id="v-pills-tab2" role="tablist"
-                                             aria-orientation="vertical">
-                                            <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill"
-                                               href="#v-pills2" role="tab" aria-controls="v-pills-home2"
-                                               aria-selected="true">
-                                                <i class="mdi mdi-home-variant d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Peminjaman</span>
-                                            </a>
-                                            <a class="nav-link" id="v-pills-profile-tab2" data-bs-toggle="pill"
-                                               href="#v-pill2" role="tab" aria-controls="v-pills-profile2"
-                                               aria-selected="false">
-                                                <i class="mdi mdi-account-circle d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Pengembalian</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- end col-->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-10">
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        <div class="tab-content" id="v-pills-tabContent-right">
-                                            <div class="tab-pane fade active show" id="v-home2" role="tabpanel"
-                                                 aria-labelledby="v-pills-home-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Spesification</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="v-profile2" role="tabpanel"
-                                                 aria-labelledby="v-pills-profile-tab2">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label>Tangal Kembali</label>
-                                                        <input type="datetime" class="form-control" readonly />
-                                                        <label>Deskripsi</label>
-                                                        <input type="text" class="form-control" readonly />
-                                                        <label>Kondisi</label>
-                                                        <input type="text" class="form-control" value="Baik" readonly />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end tabcontent-->
-                                    </div>
-                                    <!-- end col-->
-                                    <div class="col-sm-3 mt-2 mt-sm-0">
-                                        <div class="nav flex-column nav-pills" id="v-pills-tab2" role="tablist"
-                                             aria-orientation="vertical">
-                                            <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill"
-                                               href="#v-home2" role="tab" aria-controls="v-pills-home2"
-                                               aria-selected="true">
-                                                <i class="mdi mdi-home-variant d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Peminjaman</span>
-                                            </a>
-                                            <a class="nav-link" id="v-pills-profile-tab2" data-bs-toggle="pill"
-                                               href="#v-profile2" role="tab" aria-controls="v-pills-profile2"
-                                               aria-selected="false">
-                                                <i class="mdi mdi-account-circle d-lg-none d-block me-1"></i>
-                                                <span class="d-none d-lg-block">Pengembalian</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!-- end col-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <span>Total Item : </span>
-                </div>
-                <div class="row mt-2">
-                    <div class="col">
-                        <label>Keperluan</label>
-                        <input type="text" class="form-control" name="keperluan" id="keperluan" value="" readonly />
-                        <label>Dipinjam dari</label>
-                        <input type="date" class="form-control" readonly />
-                        <label>Hingga</label>
-                        <input type="date" class="form-control" readonly />
-                        <label>Approval</label>
-                        <input type="text" class="form-control" readonly />
-                        <label>Status</label>
-                        <input type="text" class="form-control" readonly />
+                    <div class="col-12" id="returnItem">
+                        
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="">Approved Return</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-
 
 
 @section scripts {
