@@ -3,15 +3,16 @@
     Layout = "_LayoutDashboard";
 }
 <div class="text-end mt-0">
-    <button class="btn btn-warning text-dark" data-bs-toggle="modal" data-bs-target="#keranjangModel"><i class=" fas fa-shopping-cart" style="color: black;"></i>   My Cart</button>
+    <button class="btn btn-warning text-dark" onclick="Keranjang()" data-bs-toggle="modal" data-bs-target="#keranjangModel"><i class=" fas fa-shopping-cart" style="color: black;"></i>   My Cart</button>
 </div>
 <div class="white-box">
     <div class="row">
         <div class="col-6">
             <h1>List Barang</h1>
+            <p id="inibarang"></p>
         </div>
         <div class="col text-end">
-            <button type="button" class="btn btn-primary text-right" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showInsert()"><i class="fas fa-plus-circle"></i>   Add Item</button>
+            <button id="addItem" type="button" class="btn btn-primary text-right" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showInsert()"><i class="fas fa-plus-circle"></i>   Add Item</button>
         </div>
     </div>
     <table id="Table" class="table table-striped table-hover">
@@ -105,32 +106,29 @@
             <div class="modal-body">
                 <form action="" id="formRequest">
                     <div class="container">
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
+                        <div class="row" id="keranjangContent">
+                            @*<div class="col-2">
+                                <img id="keranjangImg" class="figure-img img-fluid rounded"
                                      src="~/img/asus.jpg" alt="Alternate Text" />
                             </div>
                             <div class="col-8">
-                                <p>Laptop Asus </p>
+                                <p id="keranjangNama">Laptop Asus </p>
                             </div>
 
                             <div class="col text-center">
                                 <a href="#" id="hapusKeranjang" style="cursor: pointer" onclick="hapusKeranjang()"><i class="fas fa-window-close fa-lg" style="color: darkred;"></i></a>
-                                @*<button class="btn-danger"><i class="fas fa-trash"></i></button>*@
-                            </div>
-
+                            </div>*@
                         </div>
 
                         <div class="row mt-2">
                             <div class="col">
-                                <input type="text" class="form-control" name="name" id="idbarang" value="" hidden />
-                                <input type="text" class="form-control" name="name" id="iduser" value="" hidden />
+                                <input type="text" class="form-control" name="AccountID" id="accountId" />
                                 <label>Keperluan</label>
-                                <input type="text" class="form-control" name="keperluan" id="keperluan" value="" required />
+                                <input type="text" class="form-control" name="Keperluan" id="keperluan" value="" required />
                                 <label>Dipinjam dari</label>
-                                <input type="date" class="form-control" required />
+                                <input type="date" name="StartDate" id="startDate"  class="form-control" required />
                                 <label>Hingga</label>
-                                <input type="date" class="form-control" required />
+                                <input type="date" name="EndDate" id="endDate"  class="form-control" required />
                             </div>
 
                         </div>

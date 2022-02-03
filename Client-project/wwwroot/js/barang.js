@@ -38,8 +38,8 @@
                     render: function (data, type, row) {
                         return `
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
-                        <button class="btn btn-success text-white me-2" onclick="insertKeranjang()"><i class="fas fa-cart-plus"></i></button>
+                        <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
+                        <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')"><i class="fas fa-cart-plus"></i></button>
                         <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit('${row['id']}')"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-danger text-white"  onclick="deleteBarang('${row['id']}')"><i class="fas fa-trash"></i></button>
                     </div>
@@ -99,41 +99,131 @@
 
         });
     console.log(isScrollX);
+    table.ajax.reload();
     //table.columns.adjust().draw();
 
+
+
 });
+
+window.onload = function (event) {
+    // disable button keranjang
+    //get localstorage
+    let Id = [];
+    if (localStorage.getItem('Id')) {
+        Id = JSON.parse(localStorage.getItem('Id'));
+    }
+
+    for (var i = 0; i < Id.length; i++) {
+        let selector = "#" + Id[i].toString();
+        $(selector).prop("disabled", true);
+        //$("#show").prop("disabled", true);
+        //$("#inibarang").html(selector);
+        console.log(selector);
+    }
+    
+};
+
+function Keranjang() {
+    let Id = [];
+    if (localStorage.getItem('Id')) {
+        Id = JSON.parse(localStorage.getItem('Id'));
+    }
+    //console.log(Id);
+    var text = "";
+    for (var i = 0; i < Id.length; i++) {
+
+        $.ajax({
+            url: "https://localhost:44381/barang/get/" + Id[i]
+        }).done((result) => {
+            console.log(result);
+            text += `
+                <input type="text" name="BarangID[]" value="${result.id}" hidden/>
+                <div class="col-2">
+                    <img id="keranjangImg" class="figure-img img-fluid rounded"
+                        src="https://localhost:44381/img/${result.image}" alt="Alternate Text" />
+                </div>
+                <div class="col-8">
+                    <p id="keranjangNama">${result.name}</p>
+                </div>
+
+                <div class="col text-center">
+                    <a href="#" id="hapusKeranjang" style="cursor: pointer" onclick="hapusKeranjang('${result.id}')"><i class="fas fa-window-close fa-lg" style="color: darkred;"></i></a>
+                </div>
+            `;
+            let AccountID = localStorage.getItem('accountID');
+            $("#accountId").val(AccountID.toString());
+            $("#keranjangContent").html(text);
+        }).fail((error) => {
+            console.log(error);
+        });
+    }
+}
+
 
 
 function showDetail(id) {
     $.ajax({
         url: "https://localhost:44381/barang/get/" + id,
         contentType: "application/json;charset=utf-8"
-}).done((result) => {
-    console.log(result);
-    $('#detailName').html(result.name);
-    $('#detailType').html(result.type.name);
-    $('#detailKeterangan').html(result.keterangan);
-    $('#detailDeskripsi').html(result.deskripsi);
-    $('#detailImg').attr("src", 'https://localhost:44381/img/'+ result.image);
-}).fail((error) => {
-    console.log(error);
-});
+    }).done((result) => {
+        console.log(result);
+        $('#detailName').html(result.name);
+        $('#detailType').html(result.type.name);
+        $('#detailKeterangan').html(result.keterangan);
+        $('#detailDeskripsi').html(result.deskripsi);
+        $('#detailImg').attr("src", 'https://localhost:44381/img/' + result.image);
+    }).fail((error) => {
+        console.log(error);
+    });
 }
 
-function insertKeranjang() {
-    // ajax here
+function insertKeranjang(id) {
+    // Save
+
+    let Id = [];
+    if (localStorage.getItem('Id')) {
+        Id = JSON.parse(localStorage.getItem('Id'));
+    }
+    Id.push(id);
+    localStorage.setItem('Id', JSON.stringify(Id));
+    //var selector = "#" + id.toString();
+    //$(selector).prop("disabled", true);
+
+    //for (var i = 0; i < Id.length; i++) {
+    //    let selector = "#" + Id[i].toString();
+    //    $(selector).prop("disabled", true);
+    //    console.log(Id[i]);
+    //}
 
     Swal.fire({
         icon: 'success',
         title: 'Sucess',
         text: "Added to Cart!"
     })
-
+    location.reload();
 }
 
-function hapusKeranjang() {
+function removeA(arr) {
+    var what, a = arguments, L = a.length, ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax = arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
+function hapusKeranjang(id) {
     // ajax here
-
+    //get localstorage
+    let Id = [];
+    if (localStorage.getItem('Id')) {
+        Id = JSON.parse(localStorage.getItem('Id'));
+    }
+    //var filteredAry = Id.filter(function (e) { return e !== id.toString() })
+    
+    console.log(Id);
     Swal.fire({
         title: 'Are you sure?',
         icon: 'warning',
@@ -144,13 +234,19 @@ function hapusKeranjang() {
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
+            //localStorage.removeItem("Id");
+            removeA(Id, id);
+            localStorage.setItem('Id', JSON.stringify(Id));
+
             Swal.fire(
                 'Deleted!',
                 'Your item has been deleted.',
                 'success'
-            )
+            );
+            location.reload();
         }
-    })
+    });
+
 }
 
 $('#formRequest').submit(function (e) {
@@ -159,12 +255,36 @@ $('#formRequest').submit(function (e) {
 });
 
 function BuatRequest() {
+    var obj = new Object();
+    obj.AccountID = $("#accountId").val();
+    obj.Keperluan = $("#keperluan").val();
+    obj.StartDate = $("#startDate").val();
+    obj.EndDate = $("#endDate").val();
+    let Id = [];
+    if (localStorage.getItem('Id')) {
+        Id = JSON.parse(localStorage.getItem('Id'));
+    }
+    obj.BarangID = Id;
+    console.log(obj);
     // ajax here
-    Swal.fire({
-        icon: 'success',
-        title: 'Your request has been proceed',
-        text: "Wait for the futher information"
+    $.ajax({
+        url: "https://localhost:44381/RequestPeminjaman/InsertRequestPeminjaman",
+        //contentType: "application/json;charset=utf-8",
+        type: "POST",
+        data: obj
+    }).done((result) => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Your request has been proceed',
+            text: "Wait for the futher information"
+        })
+
+    }).fail((error) => {
+        //alert pemberitahuan jika gagal
+        console.log("data tidak masuk");
     })
+    
+    
 }
 
 function CancelRequest() {
@@ -179,13 +299,16 @@ function CancelRequest() {
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
+            localStorage.removeItem("Id");
             Swal.fire(
-                'Berhasil!',
+                'Success!',
                 'Request canceled',
                 'success'
-            )
+            );
+            location.reload();
+
         }
-    })
+    });
 }
 
 function deleteBarang(id) {
@@ -209,7 +332,10 @@ function deleteBarang(id) {
                     'Deleted!',
                     'Your item has been deleted.',
                     'success'
-                )
+                );
+                //load tabel
+                let table = $('#Table').DataTable();
+                table.ajax.reload();
 
             }).fail((error) => {
                 //alert pemberitahuan jika gagal
@@ -282,7 +408,7 @@ function showInsert() {
     $('#barangModalTitle').html("Tambah Barang");
     $('#submitBarang').html("Save");
     // reset form
-    $("#barangImg").attr("src","");
+    $("#barangImg").attr("src", "");
     $("#formBarang")[0].reset();
 }
 
@@ -335,7 +461,9 @@ function Insert() {
             icon: ikon,
             title: judul,
             text: teks,
-        })
+        });
+        let table = $('#Table').DataTable();
+        table.ajax.reload();
 
     }).fail((error) => {
         //alert pemberitahuan jika gagal
@@ -343,7 +471,7 @@ function Insert() {
     })
 
 
-    
+
 }
 
 function Edit() {
@@ -372,7 +500,7 @@ function Edit() {
     formData.append('Deskripsi', $('#barangDeskripsi').val());
     //formData.append('Image', files[0]);
     if (files[0] == null) {
-         formData.append('ImageName', $('#barangGambar1').val());
+        formData.append('ImageName', $('#barangGambar1').val());
     }
     else {
         formData.append('Image', files[0]);
@@ -410,7 +538,9 @@ function Edit() {
             icon: ikon,
             title: judul,
             text: teks,
-        })
+        });
+        let table = $('#Table').DataTable();
+        table.ajax.reload();
 
     }).fail((error) => {
         //alert pemberitahuan jika gagal

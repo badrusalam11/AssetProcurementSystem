@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,16 @@ namespace Client_project.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var token = HttpContext.Session.GetString("JWToken");
+
+            if (token == null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("index", "Menu");
+
+            //return View();
         }
 
         [HttpPost]
@@ -35,19 +45,26 @@ namespace Client_project.Controllers
                 return RedirectToAction("index");
             }
 
+            var handler = new JwtSecurityTokenHandler();
+            var decodedValue = handler.ReadJwtToken(token);
+            var EmployeeID = decodedValue.Claims.First(c => c.Type == "EmployeeID").Value;
+            var Name = decodedValue.Claims.First(c => c.Type == "Name").Value;
+
             HttpContext.Session.SetString("JWToken", token);
+            HttpContext.Session.SetString("EmployeeID", EmployeeID);
+            HttpContext.Session.SetString("Name", Name);
             //HttpContext.Session.SetString("Name", jwtHandler.GetName(token));
             //HttpContext.Session.SetString("ProfilePicture", "assets/img/theme/user.png");
 
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("index", "Menu");
         }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("index");
-        }
+        //[Authorize]
+        //[HttpGet]
+        //public IActionResult Logout()
+        //{
+        //    HttpContext.Session.Clear();
+        //    return RedirectToAction("index");
+        //}
     }
 }
