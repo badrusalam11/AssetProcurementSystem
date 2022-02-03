@@ -28,7 +28,7 @@
             }
         ],
         "ajax": {
-            'url': 'https://localhost:44331/Api/Peminjaman/Loan/Active/ACN01',
+            'url': 'https://localhost:44331/Api/Peminjaman/Loan/Active/' + localStorage.getItem("accountID"),
             'dataType': 'json',
             'dataSrc': ''
         },
@@ -128,7 +128,7 @@ $(document).ready(function () {
             }
         ],
         "ajax": {
-            'url': 'https://localhost:44331/Api/Peminjaman/Loan/History/ACN01',
+            'url': 'https://localhost:44331/Api/Peminjaman/Loan/History/' + localStorage.getItem("accountID"),
             'dataType': 'json',
             'dataSrc': ''
         },
