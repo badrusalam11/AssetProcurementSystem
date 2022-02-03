@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,10 +19,10 @@ namespace API_project.Models
         [JsonIgnore]
         public virtual RequestPeminjaman RequestPeminjaman { get; set; }
         public string RequestPeminjamanID { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Barang Barang { get; set; }
         public string BarangID { get; set; }
-        [JsonIgnore]
+        //[JsonIgnore]
         public virtual Pengembalian Pengembalian { get; set; }
 
     }

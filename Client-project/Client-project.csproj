@@ -13,4 +13,8 @@
     <ProjectReference Include="..\API-project\API-project.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>

@@ -11,53 +11,34 @@
                      aria-labelledby="v-pills-home-tab2">
                     <div class="row" style="text-align: center;">
                         <h2>Pinjaman Active</h2>
-                        <span>Total : 3 </span>
                     </div>
                     <div class="row" style="margin-top:25px">
-                        <div class="row">
                             <div class="col">
-                                <table id="pinjamanTable" class="table table-striped table-bordered nowrap">
+                                <table id="loanActiveTable" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Action</th>
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
-                                            <th scope="col">Keperluan</th>
+                                            <th scope="col">Item</th>
                                             <th scope="col">Approval</th>
+                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="tbEmployeesBody">
-                                        <tr>
-                                            <td scope="col">1</td>
-                                            <td scope="col">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#pinjamanActiveModal"><i class="fas fa-info-circle"></i></button>
-                                                    <!--<button type="button" class="btn btn-success" onclick="approved()"><i class="fas fa-check"></i></button>-->
-                                                    <button type="button" class="btn btn-warning btn-sm" onclick=""><i class="fas fa-undo-alt"></i></button>
-                                                </div>
-                                            </td>
-                                            <td scope="col">14-03-2022</td>
-                                            <td scope="col">15-03-2022</td>
-                                            <td scope="col">
-                                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-                                            </td>
-                                            <td scope="col">Progress</td>
-                                        </tr>
+                                    <tbody class="tbLoanActiveBody">
+                                           
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="v-pills-settings2" role="tabpanel"
+                <div class="tab-pane fade active" id="v-pills-settings2" role="tabpanel"
                      aria-labelledby="v-pills-settings-tab2">
                     <div class="row" style="text-align: center;">
                         <h2>History Pinjaman</h2>
-                        <span>Total : 3 </span>
                     </div>
                     <div class="row" style="margin-top:25px">
-                        <div class="row">
                             <div class="col">
                                 <table id="historyTable" class="table table-striped table-bordered nowrap">
                                     <thead>
@@ -66,43 +47,16 @@
                                             <th scope="col">Action</th>
                                             <th scope="col">Start Date</th>
                                             <th scope="col">End Date</th>
-                                            <th scope="col">Keperluan</th>
+                                            <th scope="col">Item</th>
                                             <th scope="col">Approval</th>
+                                            <th scope="col">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="tbEmployeesBody">
-                                        <tr>
-                                            <td scope="col">1</td>
-                                            <td scope="col">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#historyPinjamanModal"><i class="fas fa-info-circle"></i></button>
-                                                </div>
-                                            </td>
-                                            <td scope="col">12-01-2022</td>
-                                            <td scope="col">14-01-2022</td>
-                                            <td scope="col">
-                                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod
-                                            </td>
-                                            <td scope="col">Approval</td>
-                                        </tr>
-                                        <tr>
-                                            <td scope="col">2</td>
-                                            <td scope="col">
-                                                <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <button type="button" class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i></button>
-                                                </div>
-                                            </td>
-                                            <td scope="col">11-01-2022</td>
-                                            <td scope="col">12-01-2022</td>
-                                            <td scope="col">
-                                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod
-                                            </td>
-                                            <td scope="col">Approval</td>
-                                        </tr>
+                                    <tbody class="tbLoanHistoryBody">
+                                            
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -110,17 +64,12 @@
         </div>
         <!-- end col-->
         <div class="col-sm-2 mt-2 mt-sm-0">
-            <div class="nav flex-column nav-pills" id="v-pills-tab2" role="tablist"
-                 aria-orientation="vertical">
-                <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill"
-                   href="#v-pills-home2" role="tab" aria-controls="v-pills-home2"
-                   aria-selected="true">
+            <div class="nav flex-column nav-pills" id="v-pills-tab2" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active show" id="v-pills-home-tab2" data-bs-toggle="pill" href="#v-pills-home2" role="tab" aria-controls="v-pills-home2" aria-selected="true">
                     <i class=" fas fa-home mdi mdi-home-variant d-lg-none d-block me-1"></i>
                     <span class="d-none d-lg-block">Pinjaman Active</span>
                 </a>
-                <a class="nav-link" id="v-pills-settings-tab2" data-bs-toggle="pill"
-                   href="#v-pills-settings2" role="tab" aria-controls="v-pills-settings2"
-                   aria-selected="false">
+                <a class="nav-link" id="v-pills-settings-tab2" data-bs-toggle="pill" href="#v-pills-settings2" role="tab" aria-controls="v-pills-settings2" aria-selected="false">
                     <i class="mdi mdi-settings-outline d-lg-none d-block me-1"></i>
                     <span class="d-none d-lg-block">History</span>
                 </a>
@@ -142,54 +91,22 @@
                     <div class="col-12">
                         <h4>Item</h4>
                     </div>
-                    <div class="col-12">
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-8">
-                                <div class="col">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Spesification</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Deskripsi</label>
-                                    <input type="text" class="form-control" readonly />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <img class="figure-img img-fluid rounded"
-                                     src="https://cdn.idntimes.com/content-images/community/2021/09/hp-pavilion-aero-13-625x417-c-824604e0f5644ad589807232cdcefaba-b5629d4e65d340d1d248280fbfec6568_600x400.jpg" alt="Alternate Text" />
-                            </div>
-                            <div class="col-8">
-                                <div class="col">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Spesification</label>
-                                    <input type="text" class="form-control" readonly />
-                                    <label>Deskripsi</label>
-                                    <input type="text" class="form-control" readonly />
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-12" id="itemLoan">
+                        
                     </div>
-                    <span>Total Item : </span>
                 </div>
                 <div class="row mt-2">
                     <div class="col">
-                        <label>Keperluan</label>
+                        <label>Needs</label>
                         <input type="text" class="form-control" name="keperluan" id="keperluan" value="" readonly />
-                        <label>Dipinjam dari</label>
-                        <input type="date" class="form-control" readonly />
-                        <label>Hingga</label>
-                        <input type="date" class="form-control" readonly />
+                        <label>Start Date</label>
+                        <input type="date" class="form-control" name="startDate" id="startDate" value="" readonly />
+                        <label>End Date</label>
+                        <input type="date" class="form-control" name="endtDate" id="endDate" value="" readonly />
                         <label>Approval</label>
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" class="form-control" name="approval" id="approval" value="" readonly />
                         <label>Status</label>
-                        <input type="text" class="form-control" readonly />
+                        <input type="text" class="form-control" name="status" id="status" value="" readonly />
                     </div>
 
                 </div>

@@ -2,6 +2,7 @@
 using API_project.ViewModel;
 using Client_project.Base;
 using Client_project.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -39,6 +40,14 @@ namespace Client_project.Controllers
             //HttpContext.Session.SetString("ProfilePicture", "assets/img/theme/user.png");
 
             return RedirectToAction("index", "Home");
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("index");
         }
     }
 }
