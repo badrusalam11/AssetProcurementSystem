@@ -36,10 +36,13 @@ namespace API_project.Repository.data
 
         public IEnumerable<Object> GetRequestLoan()
         {
-            var query = (from rp in myContext.Set<RequestPeminjaman>()
+            var query = (from e in myContext.Set<Employee>() join
+                         a in myContext.Set<Account>() on e.ID equals a.EmployeeID join
+                         rp in myContext.Set<RequestPeminjaman>() on a.ID equals rp.AccountID
                          where rp.Approval == 2 && rp.Loan == 0
                          select new
                          {
+                             Name = e.FirstName + ' '+ e.LastName,
                              ID = rp.ID,
                              StartDate = rp.StartDate,
                              EndDate = rp.EndDate,
@@ -55,10 +58,13 @@ namespace API_project.Repository.data
 
         public IEnumerable<Object> GetLoanActive()
         {
-            var query = (from rp in myContext.Set<RequestPeminjaman>()
+            var query = (from e in myContext.Set<Employee>()
+                         join a in myContext.Set<Account>() on e.ID equals a.EmployeeID
+                         join rp in myContext.Set<RequestPeminjaman>() on a.ID equals rp.AccountID
                          where rp.Approval == 0 && rp.Loan == 1
                          select new
                          {
+                             Name = e.FirstName + ' ' + e.LastName,
                              ID = rp.ID,
                              StartDate = rp.StartDate,
                              EndDate = rp.EndDate,
@@ -74,10 +80,13 @@ namespace API_project.Repository.data
 
         public IEnumerable<Object> GetReturnRequestLoan()
         {
-            var query = (from rp in myContext.Set<RequestPeminjaman>()
+            var query = (from e in myContext.Set<Employee>()
+                         join a in myContext.Set<Account>() on e.ID equals a.EmployeeID
+                         join rp in myContext.Set<RequestPeminjaman>() on a.ID equals rp.AccountID
                          where rp.Approval == 2 && rp.Loan == 2
                          select new
                          {
+                             Name = e.FirstName + ' ' + e.LastName,
                              ID = rp.ID,
                              StartDate = rp.StartDate,
                              EndDate = rp.EndDate,
@@ -93,10 +102,13 @@ namespace API_project.Repository.data
 
         public IEnumerable<Object> GetLoanHistory()
         {
-            var query = (from rp in myContext.Set<RequestPeminjaman>()
+            var query = (from e in myContext.Set<Employee>()
+                         join a in myContext.Set<Account>() on e.ID equals a.EmployeeID
+                         join rp in myContext.Set<RequestPeminjaman>() on a.ID equals rp.AccountID
                          where (rp.Approval == 1 && rp.Loan == 3) || (rp.Approval == 0 && rp.Loan == 2)
                          select new
                          {
+                             Name = e.FirstName + ' ' + e.LastName,
                              ID = rp.ID,
                              StartDate = rp.StartDate,
                              EndDate = rp.EndDate,
