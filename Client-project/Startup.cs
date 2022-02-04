@@ -35,6 +35,7 @@ namespace Client_project
             services.AddScoped<BarangRepository>();
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<RequestPeminjamanRepository>();
+            services.AddScoped<TagihanRepository>();
             services.AddScoped<Address>();
             services.AddMvc().AddNewtonsoftJson();
             services.AddSession();
