@@ -16,13 +16,13 @@
                         <span class="d-none d-lg-block">Active Bills</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                @*<li class="nav-item">
                     <a href="#history" data-bs-toggle="tab" aria-expanded="true"
                        class="nav-link">
                         <i class="mdi mdi-account-circle d-lg-none d-block me-1"></i>
                         <span class="d-none d-lg-block">History</span>
                     </a>
-                </li>
+                </li>*@
             </ul>
         </div>
     </div>
@@ -104,26 +104,29 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        @*<div class="col-6">*@
-                        <img class="figure-img img-fluid rounded"
-                             src="https://apdovi.forum-vokasi.id/wp-content/uploads/2020/08/Bukti-Pembayaran-Seminar-3-APDOVI-ee6c8e1970d276252a4079f3f5aef6eb.jpeg" alt="Alternate Text" />
-                        @*</div>*@
-                        @*<div class="col-6">*@
+                        <img id="gambarBukti" class="figure-img img-fluid rounded"
+                             alt="Alternate Text" />
                         <table>
+                            
+                            <tr>
+                                <td>Date</td>
+                                <td>:</td>
+                                <td id="date"></td>
+                            </tr>
                             <tr>
                                 <td>Total Bill</td>
                                 <td>:</td>
-                                <td>Rp. 50.000</td>
+                                <td id="totalBill"></td>
                             </tr>
                             <tr>
                                 <td>Payment Status</td>
                                 <td>:</td>
-                                <td>Paid</td>
+                                <td id="paymentStatus"></td>
                             </tr>
                             <tr>
                                 <td>Confirmation Status</td>
                                 <td>:</td>
-                                <td>Confirmed</td>
+                                <td id="confirmStatus"></td>
                             </tr>
                         </table>
                     </div>
@@ -156,10 +159,16 @@
                         <div class="row ">
                             <div class="col">
 
-
                                 @*<input class="form-control" type="file" id="barangGambar" accept="image/*">*@
+                                <input type="text" id="tagihanId" name="ID" value="" hidden/>
+                                <input type="text" id="TotalBayar" name="TotalBayar" value="" hidden/>
+                                <input type="text" id="StatusPembayaran" name="StatusPembayaran" value="" hidden/>
+                                <input type="text" id="IsConfirm" name="IsConfirm" value="" hidden/>
+                                <input type="text" id="NotaID" name="NotaID" value="" hidden/>
+                                <input type="text" id="UploadDate" name="UploadDate" value="" hidden/>
+                                <input type="text" id="PengembalianID" name="PengembalianID" value="" hidden/>
                                 <div class="image-upload-wrap">
-                                    <input id="buktiGambar" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+                                    <input id="buktiGambar" class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" required/>
                                     <div class="drag-text">
                                         <h3>UPLOAD YOUR MEMORANDUM TRANSFER (Bukti Transfer)</h3>
                                     </div>

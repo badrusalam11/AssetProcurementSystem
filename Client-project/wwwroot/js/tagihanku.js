@@ -12,6 +12,69 @@
 
     let table = $('#Table').DataTable(
         {
+            ajax: {
+                url: "https://localhost:44331/api/tagihan/gettagihan/" + localStorage.getItem("AccountID"),
+                dataSrc: ''
+            },
+            dataType: 'json',
+            columns: [
+                {
+                    data: null,
+                    render: (data, type, row, meta) => {
+                        //return (meta.row + 1);
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: "null",
+                    render: (data, type, row) => {
+                        let myArray = row['uploadDate'].split("T");
+                        myArray = myArray[0].split("-");
+                        let tanggal = myArray[2] + "/" + myArray[1] + "/" + myArray[0];
+                        return tanggal;
+                    }
+                },
+                {
+                    data: "totalBayar",
+                    render: DataTable.render.number('.', ',', 2, 'Rp ')
+                },
+                {
+                    data: null,
+                    render: (data, type, row) => {
+                        if (row['statusPembayaran'] == true) {
+                            return "Paid";
+                        }
+                        else {
+                            return "Unpaid";
+                        }
+                    }
+                },
+                {
+                    data: null,
+                    render: (data, type, row) => {
+                        if (row['isConfirm'] == true) {
+                            return "Confirmed";
+                        }
+                        else {
+                            return "Process";
+                        }
+                    }
+                },
+                {
+                    data: null,
+                    bSortable: false,
+                    render: function (data, type, row) {
+
+                        return `
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                                <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#detailModel" onclick="showDetail('${row['id']}')"><i class="fas fa-info-circle"></i></button>
+                                <button class="btn btn-success text-white" onclick="showBayar('${row['id']}')" data-bs-toggle="modal" data-bs-target="#formModel"><i class="far fa-money-bill-alt"></i></button>
+                        </div>
+                        `;
+
+                    }
+                },
+            ],
             dom: 'Bfrtip',
             scrollX: isScrollX,
             buttons: [
@@ -133,6 +196,53 @@ $(document).ready(function () {
 });
 
 
+
+function formatRupiah(angka, prefix) {
+    var number_string = angka.toString().replace(/[^,\d]/g, ''),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+
+
+function showDetail(id) {
+    $.ajax({
+        url: "https://localhost:44331/api/tagihan/" + id,
+        contentType: "application/json;charset=utf-8"
+    }).done((result) => {
+        console.log(result);
+        let myArray = result.uploadDate.split("T");
+        myArray = myArray[0].split("-");
+        let tanggal = myArray[2] + "/" + myArray[1] + "/" + myArray[0];
+        $('#date').html(tanggal);
+
+        $('#totalBill').html(formatRupiah(result.totalBayar, "Rp"));
+
+        result.statusPembayaran ? $('#paymentStatus').html("Paid") : $('#paymentStatus').html("Unpaid");
+        result.isConfirm ? $('#confirmStatus').html("Confirmed") : $('#confirmStatus').html("Process");
+        if (result.notaID == null) {
+            //$('#gambarBukti').attr("hidden", true);
+            $('#gambarBukti').attr("src", 'https://localhost:44381/img/default.png');
+        }
+        else {
+            $('#gambarBukti').attr("src", 'https://localhost:44381/img/' + result.nota.image);
+        }
+    }).fail((error) => {
+        console.log(error);
+    });
+}
+
+
 // upload bukti transfer
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -172,29 +282,75 @@ $('#formBukti').submit(function (e) {
     InsertBukti();
 });
 
+function showBayar(id) {
+    console.log(id);
+
+    // ajax here
+    $.ajax({
+        url: "https://localhost:44381/tagihan/get/" + id
+    }).done((result) => {
+        console.log(result);
+        $("#tagihanId").val(id);
+        $("#TotalBayar").val(result.totalBayar);
+        $("#StatusPembayaran").val(result.statusPembayaran);
+        $("#IsConfirm").val(result.isConfirm);
+        $("#NotaID").val(result.notaID);
+        $("#UploadDate").val(result.uploadDate);
+        $("#PengembalianID").val(result.pengembalianID);
+
+    }).fail((error) => {
+        console.log(error);
+    });
+
+}
+
 function InsertBukti() {
     // ajax here
-    let ikon, teks, judul;
-    if (formatValidation() == 1) {
-        ikon = 'success';
-        judul = 'Data Uploaded successfully';
-    }
-    else if (formatValidation() == -1) {
-        ikon = 'error';
-        judul = 'Wrong image format!';
-        teks = 'Please insert the right format!';
-    }
-    else {
-        ikon = 'error';
-        judul = 'The file is too large!';
-        teks = 'Image must be less than 50 MB!';
-    }
+    var form = $('#formBukti')[0];
+    var formData = new FormData(form);
+    var fileUpload = $("#buktiGambar").get(0);
+    var files = fileUpload.files;
 
-    Swal.fire({
-        icon: ikon,
-        title: judul,
-        text: teks,
+    formData.append("Image", files[0]);
+    console.log(...formData);
+
+    // ajax here
+    $.ajax({
+        url: "https://localhost:44381/tagihan/UpdateTagihan/",
+        type: "PUT",
+        //data: obj
+        contentType: false, // Not to set any content header  
+        processData: false, // Not to process data 
+        data: formData
+    }).done((result) => {
+
+        let ikon, teks, judul;
+        if (formatValidation() == 1) {
+            ikon = 'success';
+            judul = 'Data Uploaded successfully';
+        }
+        else if (formatValidation() == -1) {
+            ikon = 'error';
+            judul = 'Wrong image format!';
+            teks = 'Please insert the right format!';
+        }
+        else {
+            ikon = 'error';
+            judul = 'The file is too large!';
+            teks = 'Image must be less than 50 MB!';
+        }
+
+        Swal.fire({
+            icon: ikon,
+            title: judul,
+            text: teks,
+        })
+
+    }).fail((error) => {
+        //alert pemberitahuan jika gagal
+        console.log("data tidak masuk");
     })
+
 }
 
 function formatValidation() {

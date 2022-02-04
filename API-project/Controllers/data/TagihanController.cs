@@ -1,5 +1,6 @@
 ﻿using API_project.Models;
 using API_project.Repository.data;
+using API_project.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +21,20 @@ namespace API_project.Controllers.data
             this.tagihanRepository = tagihanRepository;
         }
 
+        [HttpGet]
+        [Route("GetTagihan/{id}")]
+        public ActionResult<Object> GetTagihan(string id)
+        {
+            var result = tagihanRepository.GetTagihan(id);
+            if (result != null)
+            {
+                //return Ok(new { status = HttpStatusCode.OK, result, message = "Data loaded" });
+                return Ok(result);
+            }
+            return Ok(new { status = HttpStatusCode.NotFound, message = "Error data not found" });
+
+        }
+
         [HttpPut]
         [Route("ApproveTagihan/{id}")]
         public ActionResult ApproveTagihan(string id)
@@ -33,17 +48,16 @@ namespace API_project.Controllers.data
         }
 
         [HttpPut]
-        [Route("RejectTagihan/{id}")]
-        public ActionResult RejectTagihan(string id)
+        [Route("UpdateTagihan")]
+        public ActionResult UpdateTagihan(TagihankuVM tagihankuVM)
         {
-            var response = tagihanRepository.RejectTagihan(id);
+            var response = tagihanRepository.UpdateTagihan(tagihankuVM);
             if (response == 1)
             {
-                return Ok(new { status = HttpStatusCode.OK, response, message = "Berhasil Delete Data" });
+                return Ok(new { status = HttpStatusCode.OK, response, message = "Data Berhasil di Ubah" });
             }
-            return BadRequest(new { status = HttpStatusCode.BadRequest, response, message = "Gagal Delete Data" });
+            return BadRequest(new { status = HttpStatusCode.BadRequest, response, message = "Gagal Mengubah Data" });
         }
-
 
     }
 
