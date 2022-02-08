@@ -10,6 +10,137 @@
         isScrollX = false;
     }
 
+    let table = $('#TableAdmin').DataTable(
+        {
+            ajax: { url: "https://localhost:44381/barang/getallbarang", dataSrc: '' },
+            dataType: 'json',
+            columns: [
+                {
+                    data: null,
+                    //bSortable: false,
+                    render: (data, type, row, meta) => {
+                        //return (meta.row + 1);
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                { data: 'name' },
+                { data: 'type.name' },
+                //{
+                //    data: null,
+                //    render: (data, type, row) => {
+                //        return /*tipe*/(row['typeID']);
+                //    }
+                //},
+                { data: 'keterangan' },
+                {
+                    data: null,
+                    bSortable: false,
+                    render: function (data, type, row) {
+                        let Id = [];
+                        if (localStorage.getItem('Id')) {
+                            Id = JSON.parse(localStorage.getItem('Id'));
+                        }
+
+                        if (jQuery.inArray(row['id'], Id) != -1) {
+                            console.log("is in array");
+                            return `
+                    <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
+                        <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
+                        <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')" disabled><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                        `;
+                        } else {
+                            console.log("is NOT in array");
+                            return `
+                    <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
+                        <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
+                        <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')"><i class="fas fa-cart-plus"></i></button>
+                    </div>
+                        `;
+                        }
+                        
+                    }
+                }, {
+                    data: null,
+                    bSortable: false,
+                    render: function (data, type, row) {
+                        return `<div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit('${row['id']}')"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger text-white"  onclick="deleteBarang('${row['id']}')"><i class="fas fa-trash"></i></button>
+                    </div>`;
+                    }
+                }
+            ],
+            dom: 'Bfrtip',
+            scrollX: isScrollX,
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    title: "List Barang",
+                    className: "btn btn-secondary",
+                    text: "<i class='fas fa-clone'> Copy</i>",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    title: "List Barang",
+                    className: "btn btn-warning",
+                    text: "<i class='fas fa-table'> CSV</i>",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    title: "List Barang",
+                    className: "btn btn-success",
+                    text: "<i class='fas fa-file-excel'> Excel</i>",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: "List Barang",
+                    className: "btn btn-danger",
+                    text: "<i class='fas fa-file-pdf'> PDF</i>",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: "List Barang",
+                    className: "btn btn-primary",
+                    text: "<i class='fas fa-print'> Print</i>",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                }
+            ]
+
+        });
+    console.log(isScrollX);
+    table.ajax.reload();
+    //table.columns.adjust().draw();
+
+
+
+});
+$(document).ready(function () {
+    let isScrollX;
+    if (window.matchMedia("(max-width: 425px)").matches) {
+        // Viewport is less or equal to 700 pixels wide
+        console.log('kurang dari atau sama dengan 425px');
+        isScrollX = true;
+    }
+    else {
+        console.log('lebih dari 425px');
+        isScrollX = false;
+    }
+
     let table = $('#Table').DataTable(
         {
             ajax: { url: "https://localhost:44381/barang/getallbarang", dataSrc: '' },
@@ -47,8 +178,6 @@
                     <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                         <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
                         <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')" disabled><i class="fas fa-cart-plus"></i></button>
-                        <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit('${row['id']}')"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger text-white"  onclick="deleteBarang('${row['id']}')"><i class="fas fa-trash"></i></button>
                     </div>
                         `;
                         } else {
@@ -57,14 +186,12 @@
                     <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
                         <button id="show" class="btn btn-primary me-2"  onclick="showDetail('${row['id']}')" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
                         <button id="${row['id']}" class="btn btn-success text-white me-2"  onclick="insertKeranjang('${row['id']}')"><i class="fas fa-cart-plus"></i></button>
-                        <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit('${row['id']}')"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger text-white"  onclick="deleteBarang('${row['id']}')"><i class="fas fa-trash"></i></button>
                     </div>
                         `;
                         }
-                        
+
                     }
-                },
+                }
             ],
             dom: 'Bfrtip',
             scrollX: isScrollX,
@@ -222,8 +349,11 @@ function insertKeranjang(id) {
     })
     //location.reload();
     //load tabel
-    let table = $('#Table').DataTable();
+    let table = $('#TableAdmin').DataTable();
     table.ajax.reload();
+
+    let tablea = $('#Table').DataTable();
+    tablea.ajax.reload();
 }
 
 function removeA(arr) {

@@ -12,7 +12,7 @@
     <meta name="description"
           content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Ample Admin Lite Template by WrapPixel</title>
+    <title>Asset Procurement System</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
     @*Data tables*@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
@@ -47,7 +47,7 @@
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="~/vendor/plugins/images/logo-text.png" alt="homepage" />
+                            <h3>Asset Procurement System</h3>
                         </span>
                     </a>
                     <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
@@ -108,12 +108,15 @@
                                         <span class="hide-menu">My Loan</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="ApprovePinjaman">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Approve Loan </span>
-                                    </a>
-                                </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-controller="Menu" asp-action="ApprovePinjaman">
+                                            <i class="mdi mdi-adjust"></i>
+                                            <span class="hide-menu"> Approve Loan </span>
+                                        </a>
+                                    </li>
+                                }
                             </ul>
                         </li>
                         <li class="sidebar-item">
@@ -129,12 +132,15 @@
                                         <span class="hide-menu">My Bills</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" asp-controller="Menu" asp-action="ApproveTagihan">
-                                        <i class="mdi mdi-adjust"></i>
-                                        <span class="hide-menu"> Approve Bills </span>
-                                    </a>
-                                </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" asp-controller="Menu" asp-action="ApproveTagihan">
+                                            <i class="mdi mdi-adjust"></i>
+                                            <span class="hide-menu"> Approve Bills </span>
+                                        </a>
+                                    </li>
+                                }
                             </ul>
                         </li>
                     </ul>

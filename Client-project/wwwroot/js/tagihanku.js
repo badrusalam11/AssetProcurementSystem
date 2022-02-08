@@ -1,4 +1,12 @@
-﻿$(document).ready(function () {
+﻿$.ajax({
+    url: 'https://localhost:44331/api/Tagihan/GetTagihan/' + localStorage.getItem("accountID")
+}).done((result) => {
+    console.log("AC ID ", localStorage.getItem("accountID"));
+    console.log("Result ", result);
+}).fail((error) => {
+    console.log(error);
+});
+$(document).ready(function () {
     let isScrollX;
     if (window.matchMedia("(max-width: 425px)").matches) {
         // Viewport is less or equal to 700 pixels wide
@@ -13,7 +21,7 @@
     let table = $('#Table').DataTable(
         {
             ajax: {
-                url: "https://localhost:44331/api/tagihan/gettagihan/" + localStorage.getItem("AccountID"),
+                url: "https://localhost:44331/api/Tagihan/GetTagihan/" + localStorage.getItem("accountID"),
                 dataSrc: ''
             },
             dataType: 'json',
