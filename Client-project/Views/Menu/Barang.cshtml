@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Barang";
+    ViewData["Title"] = "Item";
     Layout = "_LayoutDashboard";
 }
 <div class="text-end mt-0">
@@ -8,14 +8,19 @@
 <div class="white-box">
     <div class="row">
         <div class="col-6">
-            <h1>List Barang</h1>
+            <h1>Items List</h1>
             <p id="inibarang"></p>
         </div>
-        <div class="col text-end">
-            <button id="addItem" type="button" class="btn btn-primary text-right" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showInsert()"><i class="fas fa-plus-circle"></i>   Add Item</button>
-        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col text-end">
+                <button id="addItem" type="button" class="btn btn-primary text-right" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showInsert()"><i class="fas fa-plus-circle"></i>   Add Item</button>
+            </div>
+        }
     </div>
-    <table id="Table" class="table table-striped table-hover">
+                @if (User.IsInRole("Admin"))
+                {
+    <table id="TableAdmin" class="table table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">No.</th>
@@ -23,6 +28,7 @@
                 <th scope="col">Type</th>
                 <th scope="col">Condition</th>
                 <th scope="col">Action</th>
+                <th scope="col">Special Action</th>
             </tr>
         </thead>
         <tbody class="TableBody">
@@ -42,6 +48,36 @@
             </tr>*@
         </tbody>
     </table>
+                }
+                else { 
+<table id="Table" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Condition</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody class="TableBody">
+        @*<tr>
+                <td scope="col">1</td>
+                <td scope="col">Laptop ASUS Zen 1234</td>
+                <td scope="col">Elektronika</td>
+                <td scope="col">Bagus</td>
+                <td scope="col">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#detailModel"><i class="fas fa-info-circle"></i></button>
+                        <button class="btn btn-success text-white me-2" onclick="insertKeranjang()"><i class="fas fa-cart-plus"></i></button>
+                        <button class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#tambahBarangModel" onclick="showEdit()"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-danger text-white"><i class="fas fa-trash" onclick="deleteBarang()"></i></button>
+                    </div>
+                </td>
+            </tr>*@
+    </tbody>
+</table>
+                }
 </div>
 
 

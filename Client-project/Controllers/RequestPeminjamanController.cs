@@ -2,6 +2,7 @@
 using API_project.ViewModel;
 using Client_project.Base;
 using Client_project.Repository.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Client_project.Controllers
 {
+    [Authorize]
     public class RequestPeminjamanController : BaseController<RequestPeminjaman, RequestPeminjamanRepository, string>
     {
 

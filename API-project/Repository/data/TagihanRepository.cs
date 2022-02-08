@@ -30,7 +30,7 @@ namespace API_project.Repository.data
                                 on peminjaman.ID equals pengembalian.ID
                             join tagihan in myContext.Tagihans
                                 on pengembalian.ID equals tagihan.PengembalianID
-
+                        where requstPeminjaman.AccountID == id
                         select new
                            {
                             ID = tagihan.ID,
